@@ -14,6 +14,10 @@ This is a small demo project to try and test **OpenCV** library
 and also implement on-the-fly **face detection, age and gender estimation
 using pre-trained models**.
 
+
+![](img/input1.gif) | ![](img/output1.gif) |
+---- | ---- |
+
 What do you do when you want to try something new in deep learning?
 Of course you search for articles and open-source projects first!
 
@@ -489,6 +493,11 @@ def predictAgeGender(faces):
 ```
 
 That's it.
+
+
+![](img/input1.gif) | ![](img/output1.gif) |
+---- | ---- |
+
 
 ## Results
 

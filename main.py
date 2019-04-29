@@ -1,5 +1,6 @@
 import os
 import math
+import time
 import cv2 as cv
 import numpy as np
 from age_gender_ssrnet.SSRNET_model import SSR_net_general, SSR_net
@@ -20,6 +21,8 @@ age_gender_kind = 'ssrnet'
 # Diagonal and line thickness are computed at run-time
 diagonal, line_thickness = None, None
 
+# Initialize numpy random generator
+np.random.seed(int(time.time()))
 
 # Set video to load
 videos = []
@@ -79,6 +82,11 @@ def calculateParameters(height_orig, width_orig):
     diagonal = math.sqrt(height * height + width * width)
     # Calculate line thickness to draw boxes
     line_thickness = max(1, int(diagonal / 150))
+    # Initialize output video writer
+    #global out
+    #fps = cap.get(cv.CAP_PROP_FPS)
+    #fourcc = cv.VideoWriter_fourcc(*'XVID')
+    #out = cv.VideoWriter('video.avi', fourcc=fourcc, fps=fps, frameSize=(width, height))
 
     
 def findFaces(img, confidence_threshold=0.7):
@@ -216,6 +224,9 @@ while cap.isOpened():
     cv.imshow('Source', frame_bgr)
     cv.imshow('Faces', faces_bgr)
     
+    # Write output frame
+    # out.write(faces_bgr)
+    
     # Quit on ESC button, pause on SPACE
     key = (cv.waitKey(1 if (not paused) else 0) & 0xFF)
     if (key == 27):
@@ -225,4 +236,5 @@ while cap.isOpened():
     sleep(0.001)
     
 cap.release()
+#out.release()
 cv.destroyAllWindows()
