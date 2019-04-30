@@ -420,6 +420,10 @@ This is done in two steps:
 1. Convert face `box` coordinates from small frame to the big original frame: `box_orig`.
 2. Get part of the original frame specified by coordinates: `face_bgr`.
 
+We could, of course, extract faces from the small frame.
+The reason to extract patches from big frame this is that we want to keep as much quality as possible.
+But we should keep in mind that this also may require slightly more calculations than in the first case.
+
 ```python
 def collectFaces(frame, face_boxes):
     faces = []
@@ -442,7 +446,7 @@ def collectFaces(frame, face_boxes):
     return faces
 ```
 
-Now `faces` list contains faces patches all of different sizes.
+Now `faces` list contains faces patches, all of different sizes.
 
 ### Estimating age and gender
 
@@ -498,11 +502,9 @@ def predictAgeGender(faces):
 
 That's it.
 
-![](img/output1.gif)
-
 ## Results
 
-While implementing this project I analysed different articles and models to estimate human gender and age by image.
+While implementing this project I analyzed different articles and models to estimate human gender and age by image.
 
 I have discovered that there are a lot of good models with high accuracy that are yet too big and slow to compute.
 
@@ -512,7 +514,11 @@ I have successfully used two such models for real-time estimation of age and gen
 - **SSR-Net** by Tsun-Yi Yang, Yi-Hsuan Huang, Yen-Yu Lin, Pi-Cheng Hsiu, Yung-Yu Chuang.
 - **ConvNet** by Gil Levi and Tal Hassner.
 
-It was fun to do!
+The result is great. It was fun to do!
+
+![](img/output2.gif)
+
+Gender is estimated firmly while age estimation fluctuates around true value. All is done in real-time!
 
 ### Future thoughts
 
@@ -529,7 +535,7 @@ But no benefits if model is the most **efficient** one. i.e. has decent results 
 My thoughts are the same as in this article by Michał Marcinkiewicz:
 [**The Real World is not a Kaggle Competition**](https://www.netguru.com/codestories/real-world-is-not-a-kaggle-competition)
 
-Of course, one may argue that analysing content of a video is still a complex task.
+Of course, one may argue that analyzing content of a video is still a complex task.
 And complex tasks require tons of calculations anyway.
 
 But I see at least several ways to achieve high efficiency:
@@ -549,7 +555,7 @@ Please tell me if you know any. The idea is described below.
 
 #### Hidden units reusage
 
-A typical content analysing pipeline consists of several modules running in sequence or in parallel.
+A typical content analyzing pipeline consists of several modules running in sequence or in parallel.
 
 For instance, in this simple project we have:
 
