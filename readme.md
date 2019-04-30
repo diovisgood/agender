@@ -14,9 +14,9 @@ This is a small demo project to try and test **OpenCV** library
 and also implement on-the-fly **face detection, age and gender estimation
 using pre-trained models**.
 
+This article can also be found on [medium](https://medium.com/@pavelchernov/age-and-gender-estimation-open-source-projects-overview-simple-project-from-scratch-69581831297e).
 
-![](img/input1.gif) | ![](img/output1.gif) |
----- | ---- |
+![](img/output1.gif)
 
 What do you do when you want to try something new in deep learning?
 Of course you search for articles and open-source projects first!
@@ -336,6 +336,10 @@ Currently video stream is read from random file from `videos` directory.
 import os
 import cv2 as cv
 import numpy as np
+import time
+
+# Initialize numpy random generator
+np.random.seed(int(time.time()))
 
 # Set video to load
 videos = []
@@ -494,10 +498,7 @@ def predictAgeGender(faces):
 
 That's it.
 
-
-![](img/input1.gif) | ![](img/output1.gif) |
----- | ---- |
-
+![](img/output1.gif)
 
 ## Results
 

@@ -37,7 +37,6 @@ cap = cv.VideoCapture(source_path)
 
 # Initialize face detector
 if (face_detector_kind == 'haar'):
-    #face_cascade = cv.CascadeClassifier('face_haar/lbpcascade_frontalface_improved.xml')
     face_cascade = cv.CascadeClassifier('face_haar/haarcascade_frontalface_alt.xml')
 else:
     face_net = cv.dnn.readNetFromTensorflow('face_net/opencv_face_detector_uint8.pb', 'face_net/opencv_face_detector.pbtxt')
@@ -83,10 +82,10 @@ def calculateParameters(height_orig, width_orig):
     # Calculate line thickness to draw boxes
     line_thickness = max(1, int(diagonal / 150))
     # Initialize output video writer
-    #global out
-    #fps = cap.get(cv.CAP_PROP_FPS)
-    #fourcc = cv.VideoWriter_fourcc(*'XVID')
-    #out = cv.VideoWriter('video.avi', fourcc=fourcc, fps=fps, frameSize=(width, height))
+    global out
+    fps = cap.get(cv.CAP_PROP_FPS)
+    fourcc = cv.VideoWriter_fourcc(*'XVID')
+    out = cv.VideoWriter('video.avi', fourcc=fourcc, fps=fps, frameSize=(width, height))
 
     
 def findFaces(img, confidence_threshold=0.7):
@@ -218,14 +217,14 @@ while cap.isOpened():
         # Draw labels
         for (label, box) in zip(labels, face_boxes):
             cv.putText(faces_bgr, label, org=(box[0], box[1] - 10), fontFace=cv.FONT_HERSHEY_PLAIN,
-                       fontScale=1, color=(0, 255, 255), thickness=1, lineType=cv.LINE_AA)
+                       fontScale=1, color=(0, 64, 255), thickness=1, lineType=cv.LINE_AA)
 
     # Show frames
     cv.imshow('Source', frame_bgr)
     cv.imshow('Faces', faces_bgr)
     
     # Write output frame
-    # out.write(faces_bgr)
+    out.write(faces_bgr)
     
     # Quit on ESC button, pause on SPACE
     key = (cv.waitKey(1 if (not paused) else 0) & 0xFF)
@@ -236,5 +235,5 @@ while cap.isOpened():
     sleep(0.001)
     
 cap.release()
-#out.release()
+out.release()
 cv.destroyAllWindows()
