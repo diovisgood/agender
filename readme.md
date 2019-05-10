@@ -23,7 +23,7 @@ Of course you search for articles and open-source projects first!
 
 ## Existing Open-Source Projects for Gender and Age Estimation
 
-> Disclaimer: There are much more projects that are not listed here.
+> Disclaimer: There are many more projects that are not listed here.
 > But I believe I have covered the most popular ones,
 > that appear at first pages of search results.
 
